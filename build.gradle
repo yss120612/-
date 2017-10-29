@@ -20,6 +20,11 @@ apply plugin: 'eclipse'
 apply plugin: 'spring-boot'
 apply plugin: 'war'
 
+war {
+    baseName = 'pproc'
+    version =  '0.1.0'
+}
+
 // In this section you declare where to find the dependencies of your project
 repositories {
     // Use jcenter for resolving your dependencies.
@@ -45,12 +50,22 @@ dependencies {
 	//compile group: 'org.springframework', name: 'spring-tx', 				version: rootProject.ext.springVersion
 	//compile group: 'org.springframework', name: 'spring-jdbc', 				version: rootProject.ext.springVersion
 	
-	compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: rootProject.ext.springBootVersion
+	//compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: rootProject.ext.springBootVersion{
 	//exclude name:spring-boot-starter-tomcat	}
+	
+	
+	compile("org.springframework.boot:spring-boot-starter-web:"+rootProject.ext.springBootVersion) {
+        exclude module: "spring-boot-starter-tomcat"
+    }
+    
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: rootProject.ext.springBootVersion
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-jdbc', version: rootProject.ext.springBootVersion
 	compile group: 'org.postgresql', name: 'postgresql', version: '42.1.4'
 	compile group: 'net.sf.jt400', name: 'jt400', version: '6.7'
+	compile group: 'com.itextpdf', name: 'itextpdf', version: '5.5.12'
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: rootProject.ext.springBootVersion
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-jetty', version: rootProject.ext.springBootVersion
+	
 	
     // This dependency is used internally, and not exposed to consumers on their own compile classpath.
     implementation 'com.google.guava:guava:21.0'
@@ -59,3 +74,10 @@ dependencies {
     testImplementation 'junit:junit:4.12'
 }
 
+ 
+    
+     
+
+//configurations {
+//    compile.exclude module: 'tomcat*'
+//} 
