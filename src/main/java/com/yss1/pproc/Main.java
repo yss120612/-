@@ -5,10 +5,14 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Date;
 
+import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerFactory;
 import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
@@ -18,19 +22,30 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 
 import com.itextpdf.text.DocumentException;
 import com.yss1.pproc.util.Document1;
 import com.yss1.pproc.util.Utils;
 
 
-@Configuration
-@EnableAutoConfiguration
-@ComponentScan
-public class Main extends SpringBootServletInitializer {
 
+@SpringBootApplication
+@EnableScheduling
+public class Main  {
+
+	
+	private SheduledTask sheduledTask;
 	private static Class<Main> applicationClass = Main.class;
-
+	
+	
+	
+	@PostConstruct
+	public void init()
+	{
+		sheduledTask=new SheduleOne();
+	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
@@ -51,7 +66,8 @@ public class Main extends SpringBootServletInitializer {
 			e.printStackTrace();
 		}
 		
-		ApplicationContext ctx = SpringApplication.run(applicationClass, args);
+		 
+		SpringApplication.run(applicationClass, args);
 //		String[] beanNames = ctx.getBeanDefinitionNames();
 //        Arrays.sort(beanNames);
 //        for (String beanName : beanNames) {
@@ -66,20 +82,34 @@ public class Main extends SpringBootServletInitializer {
         return factory;
     }*/
 	
-	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(applicationClass);
-	}
+//	@Override
+//	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+//		return application.sources(applicationClass);
+//	}
 
-	@Bean
+	@Value("${application.db1.username}")
+	String userPG;
+	@Value("${application.db1.password}")
+	String passPG;
+	
+	@Bean(name = "postgressDS")
     public DataSource dataSource1(){
+		
+		
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("org.postgresql.Driver");
         dataSource.setUrl("jdbc:postgresql://localhost:5432/pproc");
-        dataSource.setUsername( "userx" );
-        dataSource.setPassword( "1111" );
+        
+        dataSource.setUsername(userPG);
+        dataSource.setPassword( passPG );
         return dataSource;
     }
 	
+	
+	@Scheduled(fixedRate = 5000)
+	public void task()
+	{
+		if (sheduledTask!=null) sheduledTask.run();
+	}
 	
 }
