@@ -57,7 +57,7 @@ dependencies {
 	compile("org.springframework.boot:spring-boot-starter-web:"+rootProject.ext.springBootVersion) {
         exclude module: "spring-boot-starter-tomcat"
     }
-    
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-parent', version: rootProject.ext.springBootVersion
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: rootProject.ext.springBootVersion
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-jdbc', version: rootProject.ext.springBootVersion
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: rootProject.ext.springBootVersion

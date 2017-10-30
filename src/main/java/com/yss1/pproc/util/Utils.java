@@ -1,5 +1,8 @@
 package com.yss1.pproc.util;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -37,6 +40,20 @@ public class Utils {
 			sb.append(String.format("%02x", b));
 		}
 		return sb.toString();
+	}
+	
+	public static void save2file(byte[] ba, String fileName) {
+		FileOutputStream fw;
+		try {
+			fw = new FileOutputStream(fileName);
+			fw.write(ba);
+			fw.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 }

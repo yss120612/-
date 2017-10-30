@@ -30,15 +30,15 @@ public class Acontroller {
 	@RequestMapping(value="/idx2", method=RequestMethod.GET)
 	public String showForm(Model model) {
 																	   
-		DataSource ds= (DataSource) applicationContext.getBean("postgressDS");
-		 JdbcTemplate jdbcTemplate = new JdbcTemplate(ds);
-		 List<String> results = jdbcTemplate.query("select name from first", new RowMapper<String>() {
-             @Override
-             public String mapRow(ResultSet rs, int rowNum) throws SQLException {
-                 return new String(rs.getString("name"));
-             }
-         });
-		model.addAttribute("name",results.get(1));
+//		DataSource ds= (DataSource) applicationContext.getBean("postgressDS");
+//		 JdbcTemplate jdbcTemplate = new JdbcTemplate(ds);
+//		 List<String> results = jdbcTemplate.query("select name from first", new RowMapper<String>() {
+//             @Override
+//             public String mapRow(ResultSet rs, int rowNum) throws SQLException {
+//                 return new String(rs.getString("name"));
+//             }
+//         });
+//		model.addAttribute("name",results.get(1));
 		model.addAttribute("fam","Family Market");
 		
 		return "index2" ;

@@ -32,11 +32,11 @@ import com.yss1.pproc.util.Utils;
 
 
 @SpringBootApplication
-@EnableScheduling
+//@EnableScheduling
 public class Main  {
 
-	
-	private SheduledTask sheduledTask;
+//	@Autowired
+//	private SheduleOne sheduledTask;
 	private static Class<Main> applicationClass = Main.class;
 	
 	
@@ -44,7 +44,7 @@ public class Main  {
 	@PostConstruct
 	public void init()
 	{
-		sheduledTask=new SheduleOne();
+		//sheduledTask=new SheduleOne();
 	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -53,18 +53,18 @@ public class Main  {
 //		System.out.println(Utils.checkSNILS("04688458613"));
 //		System.out.println(Utils.getFormattedDate(new Date()));
 //		System.out.println(String.format("%02x", 0));
-		Document1 doc=new Document1();
-		try {
-			try {
-				doc.makeDocument("Yss1");
-			} catch (DocumentException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		Document1 doc=new Document1();
+//		try {
+//			try {
+//				doc.makeDocument();
+//			} catch (DocumentException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		
 		 
 		SpringApplication.run(applicationClass, args);
@@ -94,22 +94,19 @@ public class Main  {
 	
 	@Bean(name = "postgressDS")
     public DataSource dataSource1(){
-		
-		
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("org.postgresql.Driver");
-        dataSource.setUrl("jdbc:postgresql://localhost:5432/pproc");
-        
+        dataSource.setUrl("jdbc:postgresql://10.48.0.196:5432/pproc");
         dataSource.setUsername(userPG);
         dataSource.setPassword( passPG );
         return dataSource;
     }
 	
 	
-	@Scheduled(fixedRate = 5000)
-	public void task()
-	{
-		if (sheduledTask!=null) sheduledTask.run();
-	}
+//	@Scheduled(fixedRate = 50000)
+//	public void task()
+//	{
+//		if (sheduledTask!=null) sheduledTask.run();
+//	}
 	
 }
