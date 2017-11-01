@@ -33,8 +33,13 @@ import com.yss1.pproc.util.Utils;
 
 @SpringBootApplication
 //@EnableScheduling
-public class Main  {
+public class Main extends SpringBootServletInitializer {
 
+	@Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(Main.class);
+    }
+	
 //	@Autowired
 //	private SheduleOne sheduledTask;
 	private static Class<Main> applicationClass = Main.class;
