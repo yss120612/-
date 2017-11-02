@@ -65,7 +65,8 @@ dependencies {
 	compile group: 'net.sf.jt400', name: 'jt400', version: '6.7'
 	compile group: 'com.itextpdf', name: 'itextpdf', version: '5.5.12'
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: rootProject.ext.springBootVersion
-	compile group: 'org.springframework.boot', name: 'spring-boot-starter-jetty', version: rootProject.ext.springBootVersion
+	//compile group: 'org.springframework.boot', name: 'spring-boot-starter-jetty', version: rootProject.ext.springBootVersion
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-undertow', version: rootProject.ext.springBootVersion
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version:rootProject.ext.springBootVersion
 	
     // This dependency is used internally, and not exposed to consumers on their own compile classpath.
