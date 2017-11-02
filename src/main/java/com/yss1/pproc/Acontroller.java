@@ -26,7 +26,7 @@ public class Acontroller {
 	public String index() {
 		return "index";
 	}
-	
+	 
 	@RequestMapping(value="/idx2", method=RequestMethod.GET)
 	public String showForm(Model model) {
 																	   
@@ -39,7 +39,7 @@ public class Acontroller {
 //             }
 //         });
 //		model.addAttribute("name",results.get(1));
-		model.addAttribute("fam","Family Market");
+	//	model.addAttribute("fam","Family Market");
 		
 		return "index2" ;
 	}
